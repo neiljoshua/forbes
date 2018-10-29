@@ -1,6 +1,6 @@
 /* http://meyerweb.com/eric/tools/css/reset/
-	 v2.0 | 20110126
-	 License: none (public domain)
+   v2.0 | 20110126
+   License: none (public domain)
 */
 /* line 6, ../sass/reset.scss */
 html, body, div, span, applet, object, iframe,
@@ -88,20 +88,26 @@ button {
 
 /* line 1, ../sass/layout.scss */
 body {
-  width: "100%-40";
+  width: -webkit-calc(100% - 40);
+  width: -moz-calc(100% - 40);
+  width: calc(100% - 40);
   padding: 20px;
 }
 @media (min-width: 601px) {
   /* line 1, ../sass/layout.scss */
   body {
-    width: "100%-60";
+    width: -webkit-calc(100% - 60);
+    width: -moz-calc(100% - 60);
+    width: calc(100% - 60);
     padding: 20px 30px;
   }
 }
 @media (min-width: 769px) {
   /* line 1, ../sass/layout.scss */
   body {
-    width: "100%-80";
+    width: -webkit-calc(100% - 80);
+    width: -moz-calc(100% - 80);
+    width: calc(100% - 80);
     padding: 20px 40px;
   }
 }
@@ -197,7 +203,6 @@ main {
 .thumbnail {
   display: inline-block;
   width: calc(100% - 22px);
-  height: 300px;
   margin: 10px;
   border: 1px solid black;
   border-radius: 10px;
@@ -208,32 +213,46 @@ main {
   /* line 71, ../sass/layout.scss */
   .thumbnail {
     width: calc(50% - 22px);
-    height: 280px;
   }
 }
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   /* line 71, ../sass/layout.scss */
   .thumbnail {
-    width: calc( 20% - 22px );
-    height: 220px;
+    width: calc(20% - 22px);
   }
 }
-/* line 88, ../sass/layout.scss */
+/* line 85, ../sass/layout.scss */
+.thumbnail:before {
+  content: "";
+  display: block;
+  padding-top: -webkit-calc((591.44/1127.34)*100%);
+  padding-top: -moz-calc((591.44/1127.34)*100%);
+  padding-top: calc((591.44/1127.34)*100%);
+}
+@media (min-width: 1025px) {
+  /* line 85, ../sass/layout.scss */
+  .thumbnail:before {
+    padding-top: -webkit-calc((791.44/1127.34)*100%);
+    padding-top: -moz-calc((791.44/1127.34)*100%);
+    padding-top: calc((791.44/1127.34)*100%);
+  }
+}
+/* line 93, ../sass/layout.scss */
 .thumbnail__image {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 100%;
   width: 100%;
-  background: url(/dist/images/loader.gif) 50% no-repeat;
+  min-width: 100%;
+  background: url(/dist/images/loader.gif) center no-repeat;
   cursor: pointer;
   z-index: 10;
-  -webkit-transform: translateY(-50%) translateX(-50%);
-  -ms-transform: translateY(-50%) translateX(-50%);
-  transform: translateY(-50%) translateX(-50%);
 }
 
-/* line 101, ../sass/layout.scss */
+/* line 108, ../sass/layout.scss */
 .modal {
   position: fixed;
   top: 0;
@@ -255,7 +274,7 @@ main {
   -ms-transition: transform 0.25s;
   transition: transform 0.25s;
 }
-/* line 115, ../sass/layout.scss */
+/* line 122, ../sass/layout.scss */
 .modal.show__modal {
   opacity: 1;
   visibility: visible;
@@ -273,7 +292,7 @@ main {
   transition: transform 0.25s;
 }
 
-/* line 125, ../sass/layout.scss */
+/* line 132, ../sass/layout.scss */
 .modal__content {
   position: absolute;
   top: 50%;
@@ -290,15 +309,15 @@ main {
   border: 5px solid #fff;
   overflow: hidden;
 }
-/* line 136, ../sass/layout.scss */
+/* line 143, ../sass/layout.scss */
 .modal__content:before {
   content: "";
   display: block;
-  padding-top: -webkit-calc((991.44/1127.34)*100%);
-  padding-top: -moz-calc((991.44/1127.34)*100%);
-  padding-top: calc((991.44/1127.34)*100%);
+  padding-top: -webkit-calc((491.44/720.34)*100%);
+  padding-top: -moz-calc((491.44/720.34)*100%);
+  padding-top: calc((491.44/720.34)*100%);
 }
-/* line 141, ../sass/layout.scss */
+/* line 148, ../sass/layout.scss */
 .modal__content .modal__image {
   position: absolute;
   top: 0;
@@ -309,7 +328,7 @@ main {
   height: 100%;
 }
 
-/* line 152, ../sass/layout.scss */
+/* line 159, ../sass/layout.scss */
 .close__button {
   position: absolute;
   top: 30px;
@@ -320,13 +339,14 @@ main {
   font-size: 20px;
   background-color: #000;
   color: #fff;
+  border: 1px solid #fff;
   cursor: pointer;
   z-index: 5;
   -webkit-border-radius: 20px;
   -ms-border-radius: 20px;
   border-radius: 20px;
 }
-/* line 165, ../sass/layout.scss */
+/* line 173, ../sass/layout.scss */
 .close__button:hover {
   background-color: #a9a9a9;
 }

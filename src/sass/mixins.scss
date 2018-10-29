@@ -1,7 +1,7 @@
 @mixin calc($property, $expression) {
-	#{$property}: -webkit-calc(#{$expression});
-	#{$property}: -moz-calc(#{$expression});
-	#{$property}: calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: calc(#{$expression});
 }
 
 @mixin prefix($declarations, $prefixes: ()) {
@@ -15,21 +15,21 @@
 }
 
 @mixin prefix($property, $value, $prefixes: ()) {
-	@each $prefix in $prefixes {
-		#{'-' + $prefix + '-' + $property}: $value;
-	}
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
 
-	#{$property}: $value;
+  #{$property}: $value;
 }
 
 @mixin media-min-width($type) {
-		@if $type == desktop {
-				@media (min-width: 1024px + 1) { @content; }
-		}
-		@if $type == tablet {
-				@media (min-width: 768px + 1)  { @content; }
-		}
-		@else if $type == mobile {
-				@media (min-width: 600px + 1)  { @content; }
-		}
+    @if $type == desktop {
+        @media (min-width: 1024px + 1) { @content; }
+    }
+    @if $type == tablet {
+        @media (min-width: 768px + 1)  { @content; }
+    }
+    @else if $type == mobile {
+        @media (min-width: 600px + 1)  { @content; }
+    }
 }
