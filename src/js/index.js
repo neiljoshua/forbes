@@ -1,4 +1,6 @@
-var flickrApi = 'https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=8b8ebb92e392334b7a21727d1b215b36&extras=url_m%2Csunny%2Curl_l%2Cnature&&per_page=100&page=1&format=json&nojsoncallback=1';
+import '../sass/styles.scss'
+
+var flickrApi = 'https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=8b8ebb92e392334b7a21727d1b215b36&extras=url_m%2Csunny%2Curl_l%2Cnature&&per_page=150&page=1&format=json&nojsoncallback=1';
 
 var list = [];
 var pageList = [];
@@ -6,42 +8,51 @@ var currentPage = 1;
 var numberPerPage = 10;
 var numberOfPages = 1;
 var fragmentGallery = document.createDocumentFragment();
-
 var request = new XMLHttpRequest();
 
 request.open('GET', flickrApi, true);
+request.send();
+
 request.onload = function () {
 
   var data = JSON.parse(this.response);
+  console.log('Data', data);
+  console.log('request', request);
 
   if (request.status >= 200 && request.status < 400) {
 
     var photos = data.photos.photo;
 
     photos.forEach( function(photo) {
-      var imageContainer = document.createElement('div'),
-          image = document.createElement('img');
 
-      imageContainer.setAttribute('class','thumbnail');
-      image.setAttribute('data-image', photo.url_m);
-      image.setAttribute('class','thumbnail__image');
-      image.addEventListener('click',toggleModal);
-      imageContainer.appendChild(image);
-      list.push(imageContainer);
-      fragmentGallery.appendChild(imageContainer);
+      if ( photo.url_m || photo.url_l) {
+
+        var imageContainer = document.createElement('div'),
+            image = document.createElement('img');
+
+        imageContainer.setAttribute('class','thumbnail');
+        image.setAttribute('data-image', urlValidator(photo.url_m,photo.url_l));
+        image.setAttribute('class','thumbnail__image');
+        image.addEventListener('click',toggleModal);
+        imageContainer.appendChild(image);
+        list.push(imageContainer);
+        fragmentGallery.appendChild(imageContainer);
+
+      }
 
     });
 
   } else {
+    console.log('Error');
 
-    var errorMessage = document.createElement('marquee');
+    var errorMessage = document.createElement('h2');
 
     errorMessage.textContent = 'Api is not working';
     galleryPhoto.appendChild(errorMessage);
 
   }
 
-  if(document.readyState) {
+  if( request.readyState == 4 ) {
     loadImages();
   }
 
@@ -49,21 +60,29 @@ request.onload = function () {
 
 };
 
-request.send();
-
 window.onload = function() {
   var buttons = document.querySelector('.button'),
       modal = document.querySelector('.modal');
 
+
   buttons.addEventListener('click', toggleButtons);
   modal.addEventListener('click', toggleModal);
+};
+
+function urlValidator(url1, url2) {
+
+  if ( url1 != undefined ) {
+    return url1;
+  } else {
+    return url2;
+  }
+
 }
 
 function toggleButtons(event) {
-
   var className = event.target.classList.value;
 
-  switch (className){
+  switch (className) {
     case 'button__prev':
       previousPage();
       break;
@@ -77,7 +96,6 @@ function toggleButtons(event) {
       lastPage();
       break;
   }
-
 }
 
 function toggleModal(event) {
@@ -87,7 +105,7 @@ function toggleModal(event) {
       className = event.target.className;
 
   modalImage.setAttribute('src', '');
-  if( className == 'thumbnail__image') {
+  if( className == 'thumbnail__image visible') {
     modalImage.setAttribute('src', imagesrc);
   }
   modal.classList.toggle('show__modal');
@@ -98,15 +116,12 @@ function loadImages() {
   var photosReady = fragmentGallery.querySelectorAll('.thumbnail__image');
 
   photosReady.forEach( function(photo) {
-    setTimeout(function(){
-      var source = photo.dataset.image;
+    var source = photo.dataset.image;
 
-      photo.setAttribute('src',source);
-    }, 7 * photosReady.length );
-
+    photo.setAttribute('src',source);
+    photo.classList.add('visible');
   });
 }
-
 
 function createPage() {
   numberOfPages = getNumberOfPages();
@@ -127,18 +142,17 @@ function previousPage() {
 }
 
 function firstPage() {
-    currentPage = 1;
-    loadPage();
+  currentPage = 1;
+  loadPage();
 }
 
 function lastPage() {
-    currentPage = numberOfPages;
-    loadPage();
+  currentPage = numberOfPages;
+  loadPage();
 }
 
 function loadPage() {
   var firstpage = ((currentPage - 1) * numberPerPage ),
-      images = document.getElementsByClassName('thumbnail__image'),
       lastPage = firstpage + numberPerPage;
 
   pageList = list.slice(firstpage, lastPage);
@@ -148,12 +162,13 @@ function loadPage() {
 }
 
 function drawPage() {
-  var gallery = document.getElementById('gallery');
+  var gallery = document.querySelector('.gallery');
+
   while (gallery.firstChild) {
     gallery.removeChild(gallery.firstChild);
   }
-  for (i = 0; i < pageList.length; i++) {
-    document.getElementById('gallery').appendChild(pageList[i]);
+  for (var i = 0; i < pageList.length; i++) {
+    document.querySelector('.gallery').appendChild(pageList[i]);
   }
 }
 

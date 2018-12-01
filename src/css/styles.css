@@ -225,34 +225,23 @@ main {
 .thumbnail:before {
   content: "";
   display: block;
-  padding-top: -webkit-calc((591.44/1127.34)*100%);
-  padding-top: -moz-calc((591.44/1127.34)*100%);
-  padding-top: calc((591.44/1127.34)*100%);
+  padding-top: -webkit-calc(56.25%);
+  padding-top: -moz-calc(56.25%);
+  padding-top: calc(56.25%);
 }
-@media (min-width: 1025px) {
-  /* line 85, ../sass/layout.scss */
-  .thumbnail:before {
-    padding-top: -webkit-calc((791.44/1127.34)*100%);
-    padding-top: -moz-calc((791.44/1127.34)*100%);
-    padding-top: calc((791.44/1127.34)*100%);
-  }
-}
-/* line 93, ../sass/layout.scss */
+/* line 90, ../sass/layout.scss */
 .thumbnail__image {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100%;
   width: 100%;
-  min-width: 100%;
+  height: 100%;
   background: url(/dist/images/loader.gif) center no-repeat;
   cursor: pointer;
   z-index: 10;
 }
 
-/* line 108, ../sass/layout.scss */
+/* line 102, ../sass/layout.scss */
 .modal {
   position: fixed;
   top: 0;
@@ -274,7 +263,7 @@ main {
   -ms-transition: transform 0.25s;
   transition: transform 0.25s;
 }
-/* line 122, ../sass/layout.scss */
+/* line 116, ../sass/layout.scss */
 .modal.show__modal {
   opacity: 1;
   visibility: visible;
@@ -292,7 +281,7 @@ main {
   transition: transform 0.25s;
 }
 
-/* line 132, ../sass/layout.scss */
+/* line 126, ../sass/layout.scss */
 .modal__content {
   position: absolute;
   top: 50%;
@@ -309,26 +298,24 @@ main {
   border: 5px solid #fff;
   overflow: hidden;
 }
-/* line 143, ../sass/layout.scss */
+/* line 137, ../sass/layout.scss */
 .modal__content:before {
   content: "";
   display: block;
-  padding-top: -webkit-calc((491.44/720.34)*100%);
-  padding-top: -moz-calc((491.44/720.34)*100%);
-  padding-top: calc((491.44/720.34)*100%);
+  padding-top: -webkit-calc(56.25%);
+  padding-top: -moz-calc(56.25%);
+  padding-top: calc(56.25%);
 }
-/* line 148, ../sass/layout.scss */
+/* line 142, ../sass/layout.scss */
 .modal__content .modal__image {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
 }
 
-/* line 159, ../sass/layout.scss */
+/* line 151, ../sass/layout.scss */
 .close__button {
   position: absolute;
   top: 30px;
@@ -346,7 +333,7 @@ main {
   -ms-border-radius: 20px;
   border-radius: 20px;
 }
-/* line 173, ../sass/layout.scss */
+/* line 165, ../sass/layout.scss */
 .close__button:hover {
   background-color: #a9a9a9;
 }

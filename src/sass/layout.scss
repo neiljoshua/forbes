@@ -31,6 +31,7 @@ main {
   }
 }
 
+
 .button {
   display: block;
   margin: 10px auto;
@@ -68,6 +69,13 @@ main {
     font-size: 44px;
   }
 }
+
+.gallery {
+  display: inline-block;
+  width: 100%;
+  font-size: 0;
+}
+
 .thumbnail {
   display: inline-block;
   width: calc(100% - 22px);
@@ -75,6 +83,7 @@ main {
   border:  1px solid black;
   border-radius: 10px;
   position: relative;
+  background: url(/public/images/loader.gif) center no-repeat;
   overflow: hidden;
   @include media-min-width(mobile) {
     width: calc(50% - 22px);
@@ -85,23 +94,21 @@ main {
   &:before {
     content: "";
     display: block;
-    @include calc( padding-top, '(591.44/1127.34)*100%');
-    @include media-min-width(desktop) {
-      @include calc( padding-top, '(791.44/1127.34)*100%');
-    }
+    @include calc( padding-top, '56.25%');
   }
   &__image {
     position: absolute;
+    opacity: 0;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
     width: 100%;
-    min-width: 100%;
-    background: url(/dist/images/loader.gif) center no-repeat;
+    height: 100%;
     cursor: pointer;
     z-index: 10;
+    &.visible {
+      opacity: 1;
+      @include prefix( transition, opacity 1s ease-in-out .5s, webkit ms);
+    }
   }
 }
 
@@ -143,14 +150,12 @@ main {
   &:before {
     content: "";
     display: block;
-    @include calc( padding-top, '(491.44/720.34)*100%');
+    @include calc( padding-top, '56.25%');
   }
   .modal__image {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
     width: 100%;
     height: 100%;
   }
