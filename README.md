@@ -1,4 +1,4 @@
-# forbes
+# Forbes
 
 ## Setup
 
